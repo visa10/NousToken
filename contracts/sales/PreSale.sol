@@ -72,21 +72,6 @@ contract PreSale is CappedCrowdsale, RefundableCrowdsale, BonusCrowdsale {
 		return new NousToken();
 	}
 
-	/*function createMainSale(uint256 _ms_startTime, uint256 _ms_endTime, address _restricted, uint256 _restrictedPercent) internal returns (address){
-		uint256 ms_startTime = _ms_startTime;
-		uint256 ms_endTime = _ms_endTime;
-		uint256 ms_rate = rate;
-		uint256 ms_goal = goal;
-		uint256 ms_cap = cap;
-		address ms_wallet = wallet;
-		address ms_restricted = _restricted;
-		uint256 ms_restrictedPercent = _restrictedPercent;
-		address ms_token = address(token);
-		address ms_vault = address(vault);
-
-		return address (new MainSale(ms_startTime, ms_endTime, ms_rate, ms_goal, ms_cap, ms_wallet, ms_restricted, ms_restrictedPercent, ms_token, ms_vault));
-	}*/
-
 	// finalize an add new sale.
 	function finalize(address _nextSale) onlyOwner public {
 		require(nextSale != 0x0);
