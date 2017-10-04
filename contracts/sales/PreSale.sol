@@ -22,13 +22,12 @@ contract PreSale is CappedCrowdsale, RefundableCrowdsale, BonusCrowdsale {
 
 	address nextSale;
 
-	/*uint256 startTime = 1507059600; // Thu, 28 Sep 2017 16:35:00 GMT
-    uint256 endTime = 1507060200; //
+	uint256 startTime = 1507120200; // Thu, 28 Sep 2017 16:35:00 GMT
+    uint256 endTime = 1509802200; //
     uint256 rate = 6400; // 6400 NOUS => 1 ether => per wei;
     uint256 goal = 400000 * 1 ether; // min investment capital
     uint256 cap = 10000000 * 1 ether; // max capital in ether
-    address wallet = 0xdd870fa1b7c4700f2bd7f44238821c26f7392148;
-
+    address wallet = 0xF3bFf43a82c33562269171a120BA26D4FBC7799A;
 
 	function PreSale()
 		CappedCrowdsale(cap)
@@ -40,10 +39,10 @@ contract PreSale is CappedCrowdsale, RefundableCrowdsale, BonusCrowdsale {
 		//As goal needs to be met for a successful crowdsale
 		//the value needs to less or equal than a cap which is limit for accepted funds
 		require(goal <= cap);
-	}*/
+	}
 
 
-	function PreSale(
+	/*function PreSale(
 		uint256 _startTime,
 		uint256 _endTime,
 		uint256 _rate,
@@ -66,7 +65,7 @@ contract PreSale is CappedCrowdsale, RefundableCrowdsale, BonusCrowdsale {
 		require(_goal <= _cap);
 
 		//nextSale = createMainSale(_ms_startTime, _ms_endTime, _restricted, _restrictedPercent);
-	}
+	}*/
 
 	function createTokenContract() internal returns (MintableToken) {
 		return new NousToken();
@@ -84,6 +83,12 @@ contract PreSale is CappedCrowdsale, RefundableCrowdsale, BonusCrowdsale {
 		require(nextSale != 0x0);
 		token.transferOwnership(nextSale);
 		vault.transferOwnership(nextSale);
+	}
+
+	function setTime(uint256 _startTime, uint256 _endTime) onlyOwner public {
+		require(_startTime < _endTime);
+		startTime = _startTime;
+		endTime = _endTime;
 	}
 }
 

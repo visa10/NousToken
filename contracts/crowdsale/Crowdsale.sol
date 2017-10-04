@@ -119,5 +119,4 @@ contract Crowdsale {
 		return now > endTime;
 	}
 
-
 }

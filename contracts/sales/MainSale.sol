@@ -56,7 +56,27 @@ contract MainSale is CappedCrowdsale, RefundableCrowdsale, BonusCrowdsale {
 		//As goal needs to be met for a successful crowdsale
 		//the value needs to less or equal than a cap which is limit for accepted funds
 		require(goal <= cap);
+	}
 
+	// finalize an add new sale.
+	function finalize() onlyOwner public {
+		super.finalize();
+	}
+
+	// pay restricted percent
+	function finalization() internal {
+		uint256 totalSupply = token.totalSupply();
+		uint restrictedTokens = totalSupply.mul(restrictedPercent).div(100);
+		token.mint(restricted, restrictedTokens);
+		token.finishMinting();
+		super.finalization();
+	}
+
+	// set time sale
+	function setTime(uint256 _startTime, uint256 _endTime) onlyOwner public {
+		require(_startTime < _endTime);
+		startTime = _startTime;
+		endTime = _endTime;
 	}
 
 }
